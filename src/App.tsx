@@ -1,14 +1,14 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router";
 import "./App.css";
 import AppLayout from "./components/common/AppLayout";
-
-import { lazy, Suspense } from "react";
 import PageTransition from "./components/common/PageTransition";
+import ProfileLayout from "./components/common/ProfileLayout";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import { Home } from "./pages";
 
 const About = lazy(() => import("./pages/about"));
-
+const Profile = lazy(() => import("./pages/profile"));
 const Roadmap = lazy(() => import("./pages/roadmap"));
 const Login = lazy(() => import("./pages/login"));
 function App() {
@@ -47,9 +47,17 @@ function App() {
 					/>
 				</Route>
 				<Route
-					path=""
-					element={<Suspense key={location.pathname}></Suspense>}
-				/>
+					path="profile"
+					element={
+						<Suspense key={location.pathname}>
+							<ProtectedRoute>
+								<ProfileLayout />
+							</ProtectedRoute>
+						</Suspense>
+					}
+				>
+					<Route index element={<Profile />} />
+				</Route>
 				<Route
 					path="about"
 					element={
