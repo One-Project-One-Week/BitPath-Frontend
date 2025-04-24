@@ -7,6 +7,7 @@ type Props = {
 	placeholder: string;
 	type?: string;
 	customCss?: string;
+	customParentCss?: string;
 };
 
 const CustomInput = ({
@@ -14,9 +15,10 @@ const CustomInput = ({
 	placeholder,
 	type = "text",
 	customCss,
+	customParentCss,
 }: Props) => {
 	return (
-		<div className="flex flex-col gap-1 my-4 w-full">
+		<div className={cn("flex flex-col gap-1 my-4 w-full", customParentCss)}>
 			<Field
 				className={cn("", customCss)}
 				type={type}
