@@ -1,11 +1,15 @@
 import { Outlet } from "react-router";
+import Header from "./navbar";
+import Footer from "./footer";
 
 const AppLayout = () => {
-	return (
-		<main>
-			<Outlet />
-		</main>
-	);
+    return (
+        <main>
+            <Header />
+            <Outlet />
+            <Footer />
+        </main>
+    );
 };
 
 export default AppLayout;
