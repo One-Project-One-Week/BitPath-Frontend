@@ -1,29 +1,34 @@
 import { Skill } from "@/types";
 import { motion, useAnimation, useInView } from "framer-motion";
+import { ChevronsRight } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { getDurationInDays } from "./RoadMapTimeline";
 
 const getLevelColor = (level: string) => {
 	if (level.includes("Beginner") && level.includes("Intermediate")) {
-		return "bg-gradient-to-r from-green-500 to-yellow-500";
+		return "bg-gradient-to-r from-green-300 to-yellow-200";
 	} else if (level.includes("Intermediate") && level.includes("Advanced")) {
-		return "bg-gradient-to-r from-yellow-500 to-red-500";
+		return "bg-gradient-to-r from-yellow-200 to-red-400";
 	} else if (level.includes("Beginner")) {
-		return "bg-green-500";
+		return "bg-green-300";
 	} else if (level.includes("Intermediate")) {
-		return "bg-yellow-500";
+		return "bg-yellow-200";
 	} else if (level.includes("Advanced")) {
-		return "bg-red-500";
+		return "bg-red-400";
 	}
-	return "bg-gray-500";
+	return "bg-gray-300";
 };
 
 const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
+	const { id } = useParams();
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: 0.3 });
 	const controls = useAnimation();
+	const navigate = useNavigate();
 	const isEven = index % 2 === 0;
 
 	useEffect(() => {
@@ -55,7 +60,7 @@ const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
 			initial="hidden"
 			animate={controls}
 			variants={variants}
-			className={`relative ${
+			className={`relative group ${
 				isEven ? "md:ml-auto" : "md:mr-auto"
 			} md:w-[calc(50%-20px)]`}
 		>
@@ -78,8 +83,22 @@ const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
 				)} shadow-lg hover:shadow-xl transition-shadow duration-300`}
 				style={{ minHeight: cardHeight }}
 			>
-				<div className="flex items-center mb-4">
+				<div className="flex items-center justify-between mb-4">
 					<h3 className="text-xl font-bold">{skill.skill}</h3>
+					{id && (
+						<Button
+							onClick={() =>
+								navigate("/profile/plans/request/" + skill.id, {
+									state: { skill: skill.skill },
+								})
+							}
+							variant="link"
+							className="group-hover:visible invisible"
+						>
+							Create Study Plan
+							<ChevronsRight />
+						</Button>
+					)}
 				</div>
 
 				<div className="mb-3 flex items-center">

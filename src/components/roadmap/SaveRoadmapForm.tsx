@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import CustomForm from "../common/CustomForm";
 import CustomInput from "../common/CustomInput";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 const SaveRoadmapForm = ({
 	prompt,
@@ -32,12 +33,14 @@ const SaveRoadmapForm = ({
 	return (
 		<CustomForm initialValue={initialValue} onSubmit={mutateAsync}>
 			<CustomInput
+				as={Input}
 				name="prompt"
 				placeholder="Prompt"
 				type="hidden"
 				customParentCss="hidden"
 			/>
 			<CustomInput
+				as={Input}
 				name="response"
 				placeholder="response"
 				type="hidden"

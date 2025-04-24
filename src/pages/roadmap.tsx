@@ -1,3 +1,4 @@
+import ErrorDisplay from "@/components/common/ErrorDisplay";
 import LoadingAnimation from "@/components/common/Loading";
 import RoadMapForm from "@/components/roadmap/RoadMapForm";
 import RoadmapTimeline from "@/components/roadmap/RoadMapTimeline";
@@ -16,6 +17,8 @@ const Roadmap = () => {
 		mutate: generateRoadmap,
 		isPending,
 		isSuccess,
+		isError,
+		error,
 	} = useMutation({
 		mutationFn: ({ prompt }: { prompt: string }) =>
 			roadMapApi.getRoadMap(prompt),
@@ -26,6 +29,16 @@ const Roadmap = () => {
 	});
 	return (
 		<section className="max-w-5xl mx-auto">
+			{isError && (
+				<div className="text-center py-20">
+					<ErrorDisplay
+						error={error}
+						resetError={() => {
+							window.location.reload();
+						}}
+					/>
+				</div>
+			)}
 			{showForm && (
 				<RoadMapForm
 					onSubmit={(value) => {

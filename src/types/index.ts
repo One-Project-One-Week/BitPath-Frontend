@@ -31,3 +31,21 @@ export interface Profile {
 	current_streak: string;
 	last_studied_date: string | null;
 }
+
+export type PlanType = "deadline" | "duration";
+export interface BaseRequest {
+	skill_id: number;
+	type: PlanType;
+}
+
+export interface DeadlineRequest extends BaseRequest {
+	type: "deadline";
+	days: number;
+}
+
+export interface DurationRequest extends BaseRequest {
+	type: "duration";
+	duration: string;
+}
+
+export type PlanRequest = DeadlineRequest | DurationRequest;

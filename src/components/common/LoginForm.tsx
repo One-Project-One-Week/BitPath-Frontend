@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import * as Yup from "Yup";
+import { Input } from "../ui/input";
 import CustomForm, { CustomFormSubmitBtn } from "./CustomForm";
 import CustomInput from "./CustomInput";
 
@@ -58,12 +59,14 @@ export default function LoginForm() {
 						name="email"
 						placeholder="example@eg.com"
 						type="email"
+						as={Input}
 					/>
 					<CustomInput
 						customCss="rounded"
 						name="password"
 						placeholder="password"
 						type="password"
+						as={Input}
 					/>
 					<CustomFormSubmitBtn
 						isLoading={isLoading}

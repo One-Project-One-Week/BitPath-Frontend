@@ -8,7 +8,7 @@ export const roadMapApi = {
 	},
 
 	async getMyRoadMaps() {
-		const response = await api.get("/roadmap");
+		const response = await api.get("/roadmaps");
 		return response.data.roadmap;
 	},
 
