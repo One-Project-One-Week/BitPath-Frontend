@@ -1,12 +1,5 @@
+import { Roadmap } from "@/types";
 import TimelineItem from "./TimelineItem";
-
-interface Skill {
-	skill: string;
-	duration: string;
-	recommendedResource: string;
-	why: string;
-	level: string;
-}
 
 export const getDurationInDays = (duration: string): number => {
 	if (duration.includes("week")) {
@@ -24,8 +17,8 @@ export const getDurationInDays = (duration: string): number => {
 	return 7; // Default to a week
 };
 
-export default function RoadmapTimeline({ roadmap }: { roadmap: Skill[] }) {
-	const totalDuration = roadmap.reduce((total, skill) => {
+export default function RoadmapTimeline({ roadmap }: { roadmap: Roadmap }) {
+	const totalDuration = roadmap.skills.reduce((total, skill) => {
 		return total + getDurationInDays(skill.duration);
 	}, 0);
 
@@ -35,9 +28,7 @@ export default function RoadmapTimeline({ roadmap }: { roadmap: Skill[] }) {
 		<div className="py-10 px-4">
 			<div className="max-w-5xl mx-auto">
 				<div className="text-center mb-12">
-					<h2 className="text-3xl font-bold mb-2">
-						Frontend Development Roadmap
-					</h2>
+					<h2 className="text-3xl font-bold mb-2">{roadmap.title} Roadmap</h2>
 					<p className="text-gray-600">
 						Estimated completion time:{" "}
 						<span className="font-semibold">{totalMonths} months</span>
@@ -50,7 +41,7 @@ export default function RoadmapTimeline({ roadmap }: { roadmap: Skill[] }) {
 
 					{/* Timeline items in a staggered zigzag pattern */}
 					<div className="flex flex-col md:block relative">
-						{roadmap.map((skill, index) => {
+						{roadmap.skills.map((skill, index) => {
 							const marginTop = index === 0 ? "mt-0" : "mt-16";
 
 							return (

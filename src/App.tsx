@@ -7,35 +7,17 @@ import ProfileLayout from "./components/common/ProfileLayout";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import { Home } from "./pages";
 
-const About = lazy(() => import("./pages/about"));
 const Profile = lazy(() => import("./pages/profile"));
 const Roadmap = lazy(() => import("./pages/roadmap"));
+const MyRoadMaps = lazy(() => import("./pages/myroadmap"));
+const MyPlans = lazy(() => import("./pages/myplan"));
 const Login = lazy(() => import("./pages/login"));
 function App() {
 	const location = useLocation();
 	return (
 		<Routes>
 			<Route path="/" element={<AppLayout />}>
-				<Route
-					index
-					element={
-						<Suspense key={location.pathname}>
-							<Home />
-						</Suspense>
-					}
-				/>
-				<Route path="about">
-					<Route
-						index
-						element={
-							<Suspense key={location.pathname}>
-								<ProtectedRoute>
-									<About />
-								</ProtectedRoute>
-							</Suspense>
-						}
-					/>
-				</Route>
+				<Route index element={<Home />} />
 				<Route path="roadmap">
 					<Route
 						index
@@ -49,24 +31,39 @@ function App() {
 				<Route
 					path="profile"
 					element={
-						<Suspense key={location.pathname}>
+						<Suspense key={location.pathname} fallback={<PageTransition />}>
 							<ProtectedRoute>
 								<ProfileLayout />
 							</ProtectedRoute>
 						</Suspense>
 					}
 				>
-					<Route index element={<Profile />} />
+					<Route
+						index
+						element={
+							<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<Profile />
+							</Suspense>
+						}
+					/>
+					<Route
+						path="roadmaps"
+						element={
+							<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<MyRoadMaps />
+							</Suspense>
+						}
+					/>
+					<Route
+						path="plans"
+						element={
+							<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<MyPlans />
+							</Suspense>
+						}
+					/>
 				</Route>
-				<Route
-					path="about"
-					element={
-						<Suspense key={location.pathname}>
-							{" "}
-							<About />{" "}
-						</Suspense>
-					}
-				/>
+
 				<Route path="*" element={<div>404</div>} />
 				<Route path="login" element={<Login />} />
 			</Route>
