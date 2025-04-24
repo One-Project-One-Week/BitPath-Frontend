@@ -38,8 +38,13 @@ export default function Header() {
                 className="mr-25
              mt-5 mb-5"
             >
-                <ul className="flex flex-row gap-10">
+<<<<<<< HEAD
+                
+=======
+                <ul className="flex flex-row gap-10 ">
+                   
                     <li className="hover:font-semibold text-sm  flex-grow-1">
+>>>>>>> main
                         <NavLink
                             to="/leaderboard"
                             className={({ isActive }) =>
@@ -49,7 +54,11 @@ export default function Header() {
                             Leaderboard
                         </NavLink>
                     </li>
+<<<<<<< HEAD
                     <li className="hover:font-semibold text-sm  flex-grow-1">
+=======
+                    
+>>>>>>> main
                         <NavLink
                             to="/roadmap"
                             className={({ isActive }) =>
@@ -60,7 +69,11 @@ export default function Header() {
                         </NavLink>
                     </li>
                     {auth ? (
+<<<<<<< HEAD
                         <li className="hover:font-semibold text-sm flex-grow-1">
+=======
+                        
+>>>>>>> main
                             <NavLink
                                 to="/profile"
                                 className={({ isActive }) =>
@@ -87,7 +100,11 @@ export default function Header() {
                             </NavLink>
                         </li>
                     ) : (
+<<<<<<< HEAD
                         <li className="hover:font-semibold text-sm  flex-grow-1">
+=======
+                        
+>>>>>>> main
                             <NavLink
                                 to="/about"
                                 className={({ isActive }) =>
