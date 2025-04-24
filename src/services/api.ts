@@ -27,6 +27,7 @@ api.interceptors.response.use(
 
 		if (
 			error.response.status === 401 &&
+			error.resonse.data.message === "Token has expired" &&
 			error.response.data.message !== "Invalid credentials" &&
 			!originalRequest._retry
 		) {
@@ -34,10 +35,10 @@ api.interceptors.response.use(
 
 			try {
 				const response = await api.post("/auth/refresh");
-				const { accessToken } = response.data;
+				const { access_token } = response.data;
 
-				localStorage.setItem("accessToken", accessToken);
-				api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+				localStorage.setItem("accessToken", access_token);
+				api.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
 				return api(originalRequest);
 			} catch (refreshError) {

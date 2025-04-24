@@ -1,48 +1,9 @@
 import { Skill } from "@/types";
 import { motion, useAnimation, useInView } from "framer-motion";
-import {
-	Code,
-	Database,
-	FileCode,
-	GitBranch,
-	Globe,
-	Library,
-	Palette,
-	Server,
-	Smartphone,
-	TestTube,
-} from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import { getDurationInDays } from "./RoadMapTimeline";
-
-const getSkillIcon = (skill: string) => {
-	switch (skill) {
-		case "HTML":
-			return <Code className="h-6 w-6 text-orange-500" />;
-		case "CSS":
-			return <Palette className="h-6 w-6 text-blue-500" />;
-		case "JavaScript":
-			return <FileCode className="h-6 w-6 text-yellow-500" />;
-		case "Responsive Web Design Principles":
-			return <Smartphone className="h-6 w-6 text-pink-500" />;
-		case "Version Control (Git)":
-			return <GitBranch className="h-6 w-6 text-gray-600" />;
-		case "Basic JavaScript Frameworks (React, Vue, or Angular)":
-			return <Library className="h-6 w-6 text-cyan-500" />;
-		case "RESTful APIs":
-			return <Server className="h-6 w-6 text-violet-500" />;
-		case "Testing (Jest, Cypress)":
-			return <TestTube className="h-6 w-6 text-green-500" />;
-		case "State Management (Redux, Vuex, etc.)":
-			return <Database className="h-6 w-6 text-red-500" />;
-		case "Deployment (Netlify, Vercel, etc.)":
-			return <Globe className="h-6 w-6 text-emerald-500" />;
-		default:
-			return <FileCode className="h-6 w-6 text-gray-500" />;
-	}
-};
 
 const getLevelColor = (level: string) => {
 	if (level.includes("Beginner") && level.includes("Intermediate")) {
@@ -116,9 +77,6 @@ const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
 				style={{ minHeight: cardHeight }}
 			>
 				<div className="flex items-center mb-4">
-					<div className="mr-3 p-2 rounded-full bg-gray-100">
-						{getSkillIcon(skill.skill)}
-					</div>
 					<h3 className="text-xl font-bold">{skill.skill}</h3>
 				</div>
 

@@ -1,5 +1,4 @@
 import { CredentialResponse } from "@react-oauth/google";
-import axios from "axios";
 import api from "./api";
 
 export const authApi = {
@@ -9,17 +8,18 @@ export const authApi = {
 	},
 	googleLogin: async (credentialResponse: CredentialResponse) => {
 		try {
-			const response = await axios.post(
-				"http://localhost:8000/api/auth/google/callback",
-				{
-					token: credentialResponse.credential,
-				}
-			);
+			const response = await api.post("/auth/google/callback", {
+				token: credentialResponse.credential,
+			});
 
 			return response.data;
 		} catch (error) {
 			console.error("Authentication failed:", error);
 			throw error;
 		}
+	},
+	getProfile: async () => {
+		const response = await api.get("/auth/profile");
+		return response.data;
 	},
 };
