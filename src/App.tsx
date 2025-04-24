@@ -12,6 +12,7 @@ const Roadmap = lazy(() => import("./pages/roadmap"));
 const MyRoadMaps = lazy(() => import("./pages/myroadmap"));
 const MyPlans = lazy(() => import("./pages/myplan"));
 const Login = lazy(() => import("./pages/login"));
+const Myeachroadmap = lazy(() => import("./pages/myeachroadmap"));
 function App() {
 	const location = useLocation();
 	return (
@@ -46,14 +47,24 @@ function App() {
 							</Suspense>
 						}
 					/>
-					<Route
-						path="roadmaps"
-						element={
-							<Suspense key={location.pathname} fallback={<PageTransition />}>
-								<MyRoadMaps />
-							</Suspense>
-						}
-					/>
+					<Route path="roadmaps">
+						<Route
+							index
+							element={
+								<Suspense key={location.pathname} fallback={<PageTransition />}>
+									<MyRoadMaps />
+								</Suspense>
+							}
+						/>
+						<Route
+							path=":id"
+							element={
+								<Suspense key={location.pathname} fallback={<PageTransition />}>
+									<Myeachroadmap />
+								</Suspense>
+							}
+						/>
+					</Route>
 					<Route
 						path="plans"
 						element={

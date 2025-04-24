@@ -28,7 +28,7 @@ export default function RoadmapTimeline({ roadmap }: { roadmap: Roadmap }) {
 		<div className="py-10 px-4">
 			<div className="max-w-5xl mx-auto">
 				<div className="text-center mb-12">
-					<h2 className="text-3xl font-bold mb-2">{roadmap.title} Roadmap</h2>
+					<h2 className="text-3xl font-bold mb-2">{roadmap.title} </h2>
 					<p className="text-gray-600">
 						Estimated completion time:{" "}
 						<span className="font-semibold">{totalMonths} months</span>

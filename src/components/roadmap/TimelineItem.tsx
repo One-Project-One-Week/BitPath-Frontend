@@ -60,12 +60,14 @@ const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
 			} md:w-[calc(50%-20px)]`}
 		>
 			<div
-				className={`absolute top-0 bottom-0 w-1 ${getLevelColor(
+				className={`absolute top-0 bottom-0 w-1 rounded-full  ${getLevelColor(
 					skill.level
 				)} hidden md:block`}
 				style={{
 					left: isEven ? "-20px" : "auto",
 					right: isEven ? "auto" : "-20px",
+					marginLeft: isEven ? "-2px" : "0",
+					marginRight: isEven ? "0" : "-2px",
 					height: cardHeight,
 				}}
 			/>
