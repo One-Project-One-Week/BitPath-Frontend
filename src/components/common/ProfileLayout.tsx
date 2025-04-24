@@ -8,7 +8,7 @@ const ProfileLayout = () => {
 	console.log(profile);
 	return (
 		<section className="flex min-h-screen">
-			<div className=" flex flex-col gap-4 p-8 m-8 border-r-2 border-gray-400">
+			<aside className=" flex flex-col gap-4 p-8 m-8 border-r-2 border-gray-400">
 				<motion.div
 					initial={{ x: -100, opacity: 0 }}
 					animate={{ x: 0, opacity: 1 }}
@@ -36,11 +36,11 @@ const ProfileLayout = () => {
 				>
 					Plans
 				</motion.div>
-			</div>
+			</aside>
 			<Separator orientation="vertical" className="h-full w-8 bg-red-700" />
-			<div>
+			<main>
 				<Outlet />
-			</div>
+			</main>
 		</section>
 	);
 };
