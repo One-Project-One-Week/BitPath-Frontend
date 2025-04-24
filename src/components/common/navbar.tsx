@@ -36,15 +36,10 @@ export default function Header() {
 
             <div
                 className="mr-25
-             mt-5 mb-5"
+             mt-5 mb-5 "
             >
-<<<<<<< HEAD
-                
-=======
-                <ul className="flex flex-row gap-10 ">
-                   
-                    <li className="hover:font-semibold text-sm  flex-grow-1">
->>>>>>> main
+                <ul className="flex flex-row gap-10  ">
+                    <li className="hover:font-semibold hover:max-w-[82px] text-sm  flex-grow-1">
                         <NavLink
                             to="/leaderboard"
                             className={({ isActive }) =>
@@ -54,11 +49,7 @@ export default function Header() {
                             Leaderboard
                         </NavLink>
                     </li>
-<<<<<<< HEAD
-                    <li className="hover:font-semibold text-sm  flex-grow-1">
-=======
-                    
->>>>>>> main
+                    <li className="hover:font-semibold  hover:max-w-[61px] text-sm  flex-grow-1">
                         <NavLink
                             to="/roadmap"
                             className={({ isActive }) =>
@@ -69,11 +60,7 @@ export default function Header() {
                         </NavLink>
                     </li>
                     {auth ? (
-<<<<<<< HEAD
-                        <li className="hover:font-semibold text-sm flex-grow-1">
-=======
-                        
->>>>>>> main
+                        <li className="hover:font-semibold  text-sm flex-grow-1">
                             <NavLink
                                 to="/profile"
                                 className={({ isActive }) =>
@@ -100,11 +87,7 @@ export default function Header() {
                             </NavLink>
                         </li>
                     ) : (
-<<<<<<< HEAD
-                        <li className="hover:font-semibold text-sm  flex-grow-1">
-=======
-                        
->>>>>>> main
+                        <li className="hover:font-semibold text-sm hover:max-w-[39px] flex-grow-1">
                             <NavLink
                                 to="/about"
                                 className={({ isActive }) =>
