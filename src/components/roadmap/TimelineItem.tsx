@@ -92,14 +92,18 @@ const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
 				<p className="mb-4 text-gray-700">{skill.why}</p>
 
 				<div className="mt-auto">
-					<h4 className="font-semibold mb-1">Recommended Resource:</h4>
-					<a
-						href="#"
-						className="text-emerald-600 hover:text-emerald-800 hover:underline transition-colors"
-						onClick={(e) => e.preventDefault()}
-					>
-						{skill.recommendedResource}
-					</a>
+					<h4 className="font-semibold mb-1">Recommended Resources:</h4>
+					{skill.recommendedResource.map((resource, index) => (
+						<a
+							key={index}
+							href={resource.link}
+							className="block mb-2 text-emerald-600 hover:text-emerald-800 hover:underline transition-colors"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{resource.name}
+						</a>
+					))}
 				</div>
 			</Card>
 		</motion.div>
