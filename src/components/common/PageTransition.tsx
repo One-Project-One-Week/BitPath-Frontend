@@ -41,7 +41,7 @@ export default function PageTransition({
 	};
 
 	return (
-		<div className="flex items-center justify-center w-full h-screen">
+		<div className="flex items-center justify-center w-full h-full">
 			<motion.svg
 				width={size}
 				height={size}

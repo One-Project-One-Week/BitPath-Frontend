@@ -8,11 +8,19 @@ import { roadMapApi } from "@/services/roadmapApi";
 import { Roadmap as IRoadmap } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useLocation } from "react-router";
 
 const Roadmap = () => {
-	const [roadmap, setRoadmap] = useState<IRoadmap>({} as IRoadmap);
-	const [prompt, setPrompt] = useState("");
-	const [showForm, setShowForm] = useState(true);
+	const { state: urlState } = useLocation();
+	const [roadmap, setRoadmap] = useState<IRoadmap>(
+		urlState?.data?.response ? urlState?.data?.response : ({} as IRoadmap)
+	);
+	const [prompt, setPrompt] = useState(
+		urlState?.data?.prompt ? urlState?.data?.prompt : ""
+	);
+	const [showForm, setShowForm] = useState(
+		urlState?.from === "/login" ? false : true
+	);
 	const {
 		mutate: generateRoadmap,
 		isPending,
@@ -27,6 +35,7 @@ const Roadmap = () => {
 			setPrompt(data.prompt);
 		},
 	});
+	const willShowRoadMap = urlState?.from === "/login" ? true : isSuccess;
 	return (
 		<section className="max-w-5xl mx-auto">
 			{isError && (
@@ -51,7 +60,7 @@ const Roadmap = () => {
 			{isPending ? (
 				<LoadingAnimation />
 			) : (
-				isSuccess &&
+				willShowRoadMap &&
 				!showForm && (
 					<div className="py-12">
 						<div className="flex justify-end gap-2 px-4">

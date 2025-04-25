@@ -5,7 +5,6 @@ import { Flame } from "lucide-react";
 const Profile = () => {
 	const { profile } = useAuth();
 	if (!profile) return null;
-	profile.current_streak = "10";
 
 	// Convert streak values to numbers for calculations
 	const currentStreak = Number.parseInt(profile.current_streak) || 0;
@@ -31,7 +30,7 @@ const Profile = () => {
 
 	return (
 		<div className="container mx-auto py-10 px-4">
-			<Card className="max-w-3xl mx-auto">
+			<Card className="max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-green-100 shadow shadow-green-100">
 				<CardHeader className="pb-0">
 					<CardTitle className="text-2xl text-center">Profile</CardTitle>
 				</CardHeader>

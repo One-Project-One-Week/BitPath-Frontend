@@ -1,41 +1,47 @@
-
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-
+import FeatureCard from "@/components/landing/FeatureCard";
+import HeroSection from "@/components/landing/hero";
+import { Award, Route, Target } from "lucide-react";
 
 export default function Home() {
-    return (
-        <div className="max-w-[1000px] max-h-[350px] mx-auto flex flex-row  items-center   gap-[100px] mt-15">
-            {/* fixed‑size frame */}
+	return (
+		<div className="min-h-screen select-none">
+			<HeroSection />
 
-            <div className="relative w-[700px] h-[350px] overflow-hidden rounded-xl shadow group border-4 border-green-500 ">
-                {/* image that zooms inside the same frame */}
-                <img
-                    src="https://i.pinimg.com/474x/57/46/8d/57468d8387042651790a73ade6a0d224.jpg"
-                    alt="Hero"
-                    className="absolute inset-0 h-full w-full object-cover 
-                     transition-transform duration-300 group-hover:scale-105"
-                />
+			<div className="relative z-10  py-20 mb-40">
+				<div className="container mx-auto px-4">
+					<div className="max-w-3xl mx-auto text-center mb-16">
+						<h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-500">
+							How <span className="text-green-500">BitPath</span> Works
+						</h2>
+						<p className="text-lg text-gray-400">
+							BitPath uses advanced algorithms to create personalized learning
+							paths based on your goals and preferences. Our platform breaks
+							down complex subjects into manageable steps, helping you progress
+							efficiently.
+						</p>
+					</div>
 
-                <h1
-                    className="absolute inset-0 flex items-center justify-center
-               text-green-500 font-extrabold text-2xl text-center"
-                >
-                    Find Your Roadmap With Us
-                </h1>
+					<div className="grid md:grid-cols-3 gap-8 ">
+						<FeatureCard
+							icon={<Target className="h-8 w-8 text-emerald-500" />}
+							title="Input Your Goals"
+							description="Tell us what you want to learn, and we'll generate a customized roadmap for you."
+						/>
 
-                {/* centered login button */}
-            </div>
+						<FeatureCard
+							icon={<Route className="h-8 w-8 text-emerald-500" />}
+							title="Follow Your Path"
+							description="Work through your personalized curriculum at your own pace."
+						/>
 
-            <div className="flex flex-row gap-4 max-w-[500px]">
-                <Button className="w-[100px] text-green-500 hover:font-bold hover:max-w-1/2 bg-inherit hover:bg-inherit">
-                    <Link to="/login">Login</Link>
-                </Button>
-
-                <Button className="w-[100px] border-green-500 border-2 text-gray bg-white hover:font-bold hover:text-green-500 hover:bg-white hover:max-w-1/2">
-                    <Link to="/signup">Sign Up</Link>
-                </Button>
-            </div>
-        </div>
-    );
+						<FeatureCard
+							icon={<Award className="h-8 w-8 text-emerald-500" />}
+							title="Track Progress"
+							description="Monitor your achievements and stay motivated with visual progress tracking."
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }

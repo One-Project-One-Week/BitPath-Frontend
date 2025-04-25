@@ -27,4 +27,11 @@ export const roadMapApi = {
 		const res = await api.post("/roadmap/store", { prompt, response });
 		return res.data;
 	},
+
+	async shareRoadmap(id: string, visibility: "public" | "private") {
+		const res = await api.patch(`roadmap/${id}/visibility `, {
+			visibility,
+		});
+		return res.data;
+	},
 };
