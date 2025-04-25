@@ -32,7 +32,7 @@ export interface Profile {
 	last_studied_date: string | null;
 }
 
-export type PlanType = "deadline" | "duration";
+export type PlanType = "deadline" | "tpd";
 export interface BaseRequest {
 	skill_id: number;
 	type: PlanType;
@@ -44,7 +44,7 @@ export interface DeadlineRequest extends BaseRequest {
 }
 
 export interface DurationRequest extends BaseRequest {
-	type: "duration";
+	type: "tpd";
 	duration: string;
 }
 
