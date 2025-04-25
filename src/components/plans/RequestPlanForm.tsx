@@ -47,8 +47,8 @@ const RequestPlanForm = () => {
 				  }
 				: {
 						skill_id: parseInt(skillId!),
-						type: "duration" as const,
-						duration,
+						type: "tpd" as const,
+						duration: duration + "mins",
 				  };
 		mutateAsync(data);
 	};

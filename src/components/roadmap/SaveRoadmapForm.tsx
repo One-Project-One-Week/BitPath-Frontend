@@ -1,6 +1,8 @@
+import { useAuth } from "@/hooks/useAuth";
 import { roadMapApi } from "@/services/roadmapApi";
 import { Roadmap } from "@/types";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import CustomForm from "../common/CustomForm";
 import CustomInput from "../common/CustomInput";
@@ -18,6 +20,8 @@ const SaveRoadmapForm = ({
 		prompt,
 		response,
 	};
+	const { auth } = useAuth();
+	const navigate = useNavigate();
 	const { mutateAsync, isPending, isSuccess } = useMutation({
 		mutationFn: (value: typeof initialValue) =>
 			roadMapApi.saveRoadMap({
@@ -31,7 +35,18 @@ const SaveRoadmapForm = ({
 		},
 	});
 	return (
-		<CustomForm initialValue={initialValue} onSubmit={mutateAsync}>
+		<CustomForm
+			initialValue={initialValue}
+			onSubmit={(value) => {
+				if (!auth) {
+					toast.error("You must be logged in to save roadmaps");
+					navigate("/login", {
+						state: { from: "/roadmap", data: initialValue },
+					});
+				}
+				mutateAsync(value);
+			}}
+		>
 			<CustomInput
 				as={Input}
 				name="prompt"
