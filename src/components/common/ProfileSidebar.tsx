@@ -2,7 +2,6 @@ import { memo } from "react";
 import { NavLink } from "react-router";
 import { Button } from "../ui/button";
 const ProfileSidebar = () => {
-	console.log(" ProfileSidebar render");
 	return (
 		<aside className=" flex flex-col gap-4 p-8  border-r-2 border-gray-400">
 			<div className="flex items-center gap-2">

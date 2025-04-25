@@ -1,6 +1,7 @@
 import * as yup from "Yup";
 import CustomForm, { CustomFormSubmitBtn } from "../common/CustomForm";
 import CustomInput from "../common/CustomInput";
+import { Input } from "../ui/input";
 const RoadMapForm = ({
 	onSubmit,
 	isLoading,
@@ -30,6 +31,7 @@ const RoadMapForm = ({
 						name="prompt"
 						placeholder="Skills or Role"
 						customCss="w-full"
+						as={Input}
 					/>
 					<CustomFormSubmitBtn
 						label="Generate"

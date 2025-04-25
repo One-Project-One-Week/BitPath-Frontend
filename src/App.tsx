@@ -13,6 +13,7 @@ const MyRoadMaps = lazy(() => import("./pages/myroadmap"));
 const MyPlans = lazy(() => import("./pages/myplan"));
 const Login = lazy(() => import("./pages/login"));
 const Myeachroadmap = lazy(() => import("./pages/myeachroadmap"));
+const PlanRequest = lazy(() => import("./pages/planrequest"));
 function App() {
 	const location = useLocation();
 	return (
@@ -65,14 +66,24 @@ function App() {
 							}
 						/>
 					</Route>
-					<Route
-						path="plans"
-						element={
-							<Suspense key={location.pathname} fallback={<PageTransition />}>
-								<MyPlans />
-							</Suspense>
-						}
-					/>
+					<Route path="plans">
+						<Route
+							index
+							element={
+								<Suspense key={location.pathname} fallback={<PageTransition />}>
+									<MyPlans />
+								</Suspense>
+							}
+						/>
+						<Route
+							path="request/:skill_id"
+							element={
+								<Suspense key={location.pathname} fallback={<PageTransition />}>
+									<PlanRequest />
+								</Suspense>
+							}
+						/>
+					</Route>
 				</Route>
 
 				<Route path="*" element={<div>404</div>} />
