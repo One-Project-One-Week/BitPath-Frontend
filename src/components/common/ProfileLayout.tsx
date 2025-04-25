@@ -6,7 +6,7 @@ const ProfileLayout = () => {
 		<section className="flex min-h-screen">
 			<ProfileSidebar />
 
-			<main>
+			<main className="w-full">
 				<Outlet />
 			</main>
 		</section>

@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 import { Form, Formik, FormikValues } from "formik";
+import { JSX } from "react";
 import { Button } from "../ui/button";
 
 interface CustomFormProps<T extends FormikValues> {
 	initialValue: T;
 	validationSchema?: object;
 	onSubmit: (values: T) => void;
-	children: React.ReactNode;
+	children: React.ReactNode | ((T: T) => JSX.Element);
 	customCss?: string;
 }
 const CustomForm = <T extends FormikValues>({
@@ -23,7 +24,9 @@ const CustomForm = <T extends FormikValues>({
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
 		>
-			<Form className={cn("", customCss)}>{children}</Form>
+			<Form className={cn("", customCss)}>
+				{typeof children === "function" ? children(initialValue) : children}
+			</Form>
 		</Formik>
 	);
 };

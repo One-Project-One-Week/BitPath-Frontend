@@ -1,13 +1,12 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import { Profile } from "./types";
 
 // 1. Define the context type
 type AppContextType = {
 	auth: Record<string, string> | null;
 	setAuth: React.Dispatch<React.SetStateAction<Record<string, string> | null>>;
-	profile: Record<string, string | null> | null;
-	setProfile: React.Dispatch<
-		React.SetStateAction<Record<string, string | null> | null>
-	>;
+	profile: Profile | null;
+	setProfile: React.Dispatch<React.SetStateAction<Profile | null>>;
 };
 
 // 2. Create context
@@ -21,9 +20,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 	const [auth, setAuth] = useState<Record<string, string> | null>(
 		initialUserData
 	);
-	const [profile, setProfile] = useState<Record<string, string | null> | null>(
-		null
-	);
+	const [profile, setProfile] = useState<Profile | null>(null);
 
 	return (
 		<AppContext.Provider value={{ auth, setAuth, profile, setProfile }}>
