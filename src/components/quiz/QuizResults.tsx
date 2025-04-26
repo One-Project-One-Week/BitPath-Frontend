@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {Link } from "react-router";
 import { motion } from "framer-motion";
 import { Award, BarChart, DoorOpen } from "lucide-react";
+import { Link } from "react-router";
 import { useQuiz } from "./QuizContext";
 
 export default function QuizResults() {
@@ -138,6 +139,7 @@ export default function QuizResults() {
 
 			<div className="flex flex-col sm:flex-row gap-3 justify-center">
 				<Link to="/profile/plans">
+<<<<<<< HEAD
 				
 				<Button
 					
@@ -147,6 +149,13 @@ export default function QuizResults() {
 					<DoorOpen className="w-4 h-4 ml-2" />
 				</Button>
 					</Link>
+=======
+					<Button className="bg-green-600 hover:bg-green-700 text-white">
+						Leave
+						<DoorOpen className="w-4 h-4 ml-2" />
+					</Button>
+				</Link>
+>>>>>>> baf30e3 (redirect after taking quiz)
 			</div>
 		</motion.div>
 	);
