@@ -1,7 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { roadMapApi } from "@/services/roadmapApi";
 import { Roadmap } from "@/types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import CustomForm from "../common/CustomForm";
@@ -16,6 +16,7 @@ const SaveRoadmapForm = ({
 	prompt: string;
 	response: Roadmap;
 }) => {
+	const queryClient = useQueryClient();
 	const initialValue = {
 		prompt,
 		response,
@@ -28,7 +29,9 @@ const SaveRoadmapForm = ({
 				prompt: value.prompt,
 				response: value.response,
 			}),
+
 		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["myRoadMaps"] });
 			toast.success("Roadmap saved successfully", {
 				description: "Go to your roadmaps to create study plans",
 			});
@@ -38,6 +41,7 @@ const SaveRoadmapForm = ({
 		<CustomForm
 			initialValue={initialValue}
 			onSubmit={(value) => {
+				console.log(auth);
 				if (!auth) {
 					toast.error("You must be logged in to save roadmaps");
 					navigate("/login", {

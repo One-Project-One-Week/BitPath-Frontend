@@ -6,6 +6,7 @@ import PageTransition from "./components/common/PageTransition";
 import ProfileLayout from "./components/common/ProfileLayout";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import { Home, SignUp } from "./pages";
+import ShowCase from "./pages/showcase";
 
 const Profile = lazy(() => import("./pages/profile"));
 const Roadmap = lazy(() => import("./pages/roadmap"));
@@ -14,8 +15,9 @@ const MyPlans = lazy(() => import("./pages/myplan"));
 const Login = lazy(() => import("./pages/login"));
 const Myeachroadmap = lazy(() => import("./pages/myeachroadmap"));
 const PlanRequest = lazy(() => import("./pages/planrequest"));
+const Leaderboard = lazy(() => import("./pages/leaderboard"));
+const MyEachPlan = lazy(() => import("./pages/myeachplan"));
 function App() {
-
 	const location = useLocation();
 	return (
 		<Routes>
@@ -25,16 +27,62 @@ function App() {
 					<Route
 						index
 						element={
-							<Suspense key={location.pathname} fallback={<PageTransition />}>
+							<Suspense
+								key={location.pathname}
+								fallback={
+									<section className="h-[70vh]">
+										<PageTransition />
+									</section>
+								}
+							>
 								<Roadmap />
 							</Suspense>
 						}
 					/>
 				</Route>
+				<Route path="showcase">
+					<Route
+						index
+						element={
+							<Suspense
+								key={location.pathname}
+								fallback={
+									<section className="h-[70vh]">
+										<PageTransition />
+									</section>
+								}
+							>
+								<ShowCase />
+							</Suspense>
+						}
+					/>
+				</Route>
+				<Route
+					path="leaderboard"
+					element={
+						<Suspense
+							key={location.pathname}
+							fallback={
+								<section className="h-[70vh]">
+									<PageTransition />
+								</section>
+							}
+						>
+							<Leaderboard />
+						</Suspense>
+					}
+				/>
 				<Route
 					path="profile"
 					element={
-						<Suspense key={location.pathname} fallback={<PageTransition />}>
+						<Suspense
+							key={location.pathname}
+							fallback={
+								<section className="h-[70vh]">
+									<PageTransition />
+								</section>
+							}
+						>
 							<ProtectedRoute>
 								<ProfileLayout />
 							</ProtectedRoute>
@@ -44,7 +92,14 @@ function App() {
 					<Route
 						index
 						element={
-							<Suspense key={location.pathname} fallback={<PageTransition />}>
+							<Suspense
+								key={location.pathname}
+								fallback={
+									<section className="h-[70vh]">
+										<PageTransition />
+									</section>
+								}
+							>
 								<Profile />
 							</Suspense>
 						}
@@ -53,7 +108,14 @@ function App() {
 						<Route
 							index
 							element={
-								<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<Suspense
+									key={location.pathname}
+									fallback={
+										<section className="h-[70vh]">
+											<PageTransition />
+										</section>
+									}
+								>
 									<MyRoadMaps />
 								</Suspense>
 							}
@@ -61,7 +123,14 @@ function App() {
 						<Route
 							path=":id"
 							element={
-								<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<Suspense
+									key={location.pathname}
+									fallback={
+										<section className="h-[70vh]">
+											<PageTransition />
+										</section>
+									}
+								>
 									<Myeachroadmap />
 								</Suspense>
 							}
@@ -71,7 +140,14 @@ function App() {
 						<Route
 							index
 							element={
-								<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<Suspense
+									key={location.pathname}
+									fallback={
+										<section className="h-[70vh]">
+											<PageTransition />
+										</section>
+									}
+								>
 									<MyPlans />
 								</Suspense>
 							}
@@ -79,21 +155,42 @@ function App() {
 						<Route
 							path="request/:skill_id"
 							element={
-								<Suspense key={location.pathname} fallback={<PageTransition />}>
+								<Suspense
+									key={location.pathname}
+									fallback={
+										<section className="h-[70vh]">
+											<PageTransition />
+										</section>
+									}
+								>
 									<PlanRequest />
+								</Suspense>
+							}
+						/>
+						<Route
+							path=":planId"
+							element={
+								<Suspense
+									key={location.pathname}
+									fallback={
+										<section className="h-[70vh]">
+											<PageTransition />
+										</section>
+									}
+								>
+									<MyEachPlan />
 								</Suspense>
 							}
 						/>
 					</Route>
 				</Route>
 
-
-                <Route path="*" element={<div>404</div>} />
-                <Route path="login" element={<Login />} />
-                <Route path="SignUp" element={<SignUp />} />
-            </Route>
-        </Routes>
-    );
+				<Route path="*" element={<div>404</div>} />
+				<Route path="login" element={<Login />} />
+				<Route path="SignUp" element={<SignUp />} />
+			</Route>
+		</Routes>
+	);
 }
 
 export default App;

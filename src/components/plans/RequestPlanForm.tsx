@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/select";
 import { planApi } from "@/services/planApi";
 import { PlanRequest, PlanType } from "@/types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -17,16 +17,17 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
 const RequestPlanForm = () => {
+	const queryClient = useQueryClient();
 	const { skill_id: skillId } = useParams();
 	const [planType, setPlanType] = useState<PlanType>("deadline");
 	const [deadline, setDeadline] = useState<number>(0);
 	const [duration, setDuration] = useState<string>("");
 	const navigate = useNavigate();
-	const { mutateAsync } = useMutation({
+	const { mutateAsync, isPending } = useMutation({
 		mutationFn: (data: PlanRequest) => planApi.requestPlan(data),
 
-		onSuccess: (data) => {
-			console.log(data);
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["MyPlans"] });
 			toast.success("Plan requested successfully");
 			navigate("/profile/plans");
 		},
@@ -100,7 +101,9 @@ const RequestPlanForm = () => {
 					</div>
 				)}
 				<div className="flex justify-end my-4 w-full">
-					<Button type="submit">Request Plan</Button>
+					<Button type="submit" disabled={isPending}>
+						{isPending ? "Generating Study Plan..." : "Request Study Plan"}
+					</Button>
 				</div>
 			</form>
 		</div>

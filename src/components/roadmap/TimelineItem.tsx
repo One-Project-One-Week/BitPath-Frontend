@@ -83,7 +83,7 @@ const TimelineItem = ({ skill, index }: { skill: Skill; index: number }) => {
 				)} shadow-lg hover:shadow-xl transition-shadow duration-300`}
 				style={{ minHeight: cardHeight }}
 			>
-				<div className="flex items-center justify-between mb-4">
+				<div className="flex items-start justify-between mb-4">
 					<h3 className="text-xl font-bold">{skill.skill}</h3>
 					{id && (
 						<Button

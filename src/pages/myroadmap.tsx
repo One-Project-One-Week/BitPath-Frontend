@@ -18,9 +18,9 @@ const MyRoadMaps = () => {
 
 	return (
 		<main className="px-6  py-12">
-			<h1 className="text-3xl font-bold mb-8">Saved Roadmaps</h1>
+			<h1 className="text-3xl font-semibold text-gray-600 mb-8">Saved Roadmaps</h1>
 			{isError && (
-				<div className="text-center py-20">
+				<div className="text-center py-20 px-20">
 					<ErrorDisplay
 						error={error}
 						resetError={() => {

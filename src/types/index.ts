@@ -49,3 +49,20 @@ export interface DurationRequest extends BaseRequest {
 }
 
 export type PlanRequest = DeadlineRequest | DurationRequest;
+
+export interface Task {
+	id: number;
+	day_number: number;
+	is_finished: number;
+	task: string;
+	topic: string;
+}
+
+export interface Plan {
+	id: number;
+	completed_tasks: number;
+	total_tasks: number;
+	is_finished: number;
+	tasks?: Task[];
+	skill_name: string;
+}

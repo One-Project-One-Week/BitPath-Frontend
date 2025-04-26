@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { Skill } from "@/types";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import * as Yup from "Yup";
 import { Input } from "../ui/input";
@@ -9,8 +10,23 @@ interface InitialValue {
 	email: string;
 	password: string;
 }
-export default function LoginForm() {
-	const { googleLogin, isLoading } = useAuth();
+
+export interface RedirectToRoadmap {
+	from?: string;
+	data?: {
+		prompt?: string;
+		response?: {
+			title?: string;
+			skills?: Skill[];
+		};
+	};
+}
+export default function LoginForm({
+	redirectToRoadmap,
+}: {
+	redirectToRoadmap: RedirectToRoadmap;
+}) {
+	const { googleLogin, isLoading } = useAuth(redirectToRoadmap);
 	const initialValue: InitialValue = {
 		email: "",
 		password: "",

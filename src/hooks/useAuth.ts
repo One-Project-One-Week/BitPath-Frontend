@@ -1,4 +1,5 @@
 import { useAppContext } from "@/AppProvider";
+import { RedirectToRoadmap } from "@/components/common/LoginForm";
 import { authApi } from "@/services/authApi";
 import { CredentialResponse } from "@react-oauth/google";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ interface RegisterData {
 	password: string;
 }
 
-export const useAuth = () => {
+export const useAuth = (redirectData: RedirectToRoadmap = {}) => {
 	const navigate = useNavigate();
 	const { auth, setAuth, profile, setProfile } = useAppContext();
 
@@ -23,7 +24,19 @@ export const useAuth = () => {
 			setAuth(user);
 			localStorage.setItem("user", JSON.stringify(user));
 			localStorage.setItem("accessToken", token);
-			navigate("/");
+			if (redirectData?.from) {
+				navigate(redirectData.from, {
+					state: {
+						from: "/login",
+						data: redirectData.data,
+					},
+				});
+			} else {
+				navigate("/");
+			}
+		},
+		onError: (error) => {
+			console.log(error);
 		},
 	});
 
@@ -40,17 +53,23 @@ export const useAuth = () => {
 		},
 	});
 
-	const { data } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: ["profile"],
 		queryFn: authApi.getProfile,
 		enabled: !!auth,
 	});
 
 	useEffect(() => {
+		if (error) {
+			setAuth(null);
+			localStorage.removeItem("user");
+			localStorage.removeItem("accessToken");
+			navigate("/login");
+		}
 		if (data) {
 			setProfile(data.data.user);
 		}
-	}, [data, setProfile]);
+	}, [data, setProfile, error, navigate, setAuth]);
 
 	return {
 		profile,

@@ -1,10 +1,37 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
 	const { auth } = useAuth();
+	const [prevScrollPos, setPrevScrollPos] = useState(0);
+	const [visible, setVisible] = useState(true);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			// Get current scroll position
+			const currentScrollPos = window.scrollY;
+
+			// Set the navbar visible if scrolling up, hidden if scrolling down
+			setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+
+			// Update previous scroll position
+			setPrevScrollPos(currentScrollPos);
+		};
+
+		// Add scroll event listener
+		window.addEventListener("scroll", handleScroll);
+
+		// Clean up the event listener on component unmount
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [prevScrollPos]);
+
 	return (
-		<div className="flex flex-row justify-between border-b border-gray-300 hover:border-b-1 hover:border-gray-500 transition duration-200">
+		<div
+			className={`flex flex-row justify-between border-b border-gray-300 hover:border-b-1 hover:border-gray-500 bg-white sticky z-50 top-0 left-0 w-full  transition-transform duration-300 ${
+				visible ? "translate-y-0" : "-translate-y-full"
+			}`}
+		>
 			<div className="ml-20 mt-4">
 				<Link to="/" className="gap-2 flex flex-row">
 					<svg
@@ -35,67 +62,51 @@ export default function Header() {
 				className="mr-25
              mt-5 mb-5 "
 			>
-				<ul className="flex flex-row gap-10  ">
-					<li className="hover:font-semibold hover:max-w-[82px] text-sm  flex-grow-1">
-						<NavLink
-							to="/leaderboard"
-							className={({ isActive }) =>
-								isActive ? "text-green-500" : "text-gray"
-							}
-						>
-							Leaderboard
-						</NavLink>
-					</li>
-					<li className="hover:font-semibold  hover:max-w-[61px] text-sm  flex-grow-1">
-						<NavLink
-							to="/roadmap"
-							className={({ isActive }) =>
-								isActive ? "text-green-500" : "text-gray"
-							}
-						>
-							Roadmap
-						</NavLink>
-					</li>
+				<nav className="flex flex-row gap-10  ">
+					<NavLink
+						to="/showcase"
+						className={({ isActive }) =>
+							isActive ? "text-green-500" : "text-gray hover:scale-105"
+						}
+					>
+						Showcase
+					</NavLink>
+					<NavLink
+						to="/roadmap"
+						className={({ isActive }) =>
+							isActive ? "text-green-500" : "text-gray hover:scale-105"
+						}
+					>
+						Roadmap
+					</NavLink>
+					<NavLink
+						to="/leaderboard"
+						className={({ isActive }) =>
+							isActive ? "text-green-500" : "text-gray hover:scale-105"
+						}
+					>
+						Leaderboard
+					</NavLink>
 					{auth ? (
-						<li className="hover:font-semibold  text-sm flex-grow-1">
-							<NavLink
-								to="/profile"
-								className={({ isActive }) =>
-									isActive ? "text-green-500" : "text-gray"
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									className="lucide lucide-smile-icon lucide-smile text-gray"
-								>
-									<circle cx="12" cy="12" r="10" />
-									<path d="M8 14s1.5 2 4 2 4-2 4-2" />
-									<line x1="9" x2="9.01" y1="9" y2="9" />
-									<line x1="15" x2="15.01" y1="9" y2="9" />
-								</svg>
-							</NavLink>
-						</li>
+						<NavLink
+							to="/profile"
+							className={({ isActive }) =>
+								isActive ? "text-green-500" : "text-gray hover:scale-105"
+							}
+						>
+							Profile
+						</NavLink>
 					) : (
-						<li className="hover:font-semibold text-sm hover:max-w-[39px] flex-grow-1">
-							<NavLink
-								to="/about"
-								className={({ isActive }) =>
-									isActive ? "text-green-500" : "text-gray"
-								}
-							>
-								About
-							</NavLink>
-						</li>
+						<NavLink
+							to="/login"
+							className={({ isActive }) =>
+								isActive ? "text-green-500" : "text-gray hover:scale-105"
+							}
+						>
+							Login
+						</NavLink>
 					)}
-				</ul>
+				</nav>
 			</div>
 		</div>
 	);
