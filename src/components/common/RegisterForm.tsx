@@ -1,5 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { AxiosError } from "axios";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { Input } from "../ui/input";
@@ -26,16 +27,15 @@ export default function RegisterForm() {
 			console.log("Submitting registration:", values);
 			await register(values);
 			toast.success("Registration successful!");
-		} catch (error: any) {
+		} catch (error) {
 			console.error("Registration error:", error);
 			const errorMessage =
-				error?.response?.data?.message ||
-				error?.message ||
+				(error as AxiosError<{ message: string }>)?.response?.data?.message ||
+				(error as Error)?.message ||
 				"Registration failed. Please try again.";
 			toast.error(errorMessage);
 		}
 	};
-
 	const validationSchema = Yup.object({
 		name: Yup.string()
 			.min(2, "Name must be at least 2 characters")
