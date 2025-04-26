@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { planApi } from "@/services/planApi";
 import { taskApi } from "@/services/taskApi";
 import { Plan } from "@/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Crown, Lock, MessageCircleQuestion } from "lucide-react";
 import { Link, useParams } from "react-router";
 
