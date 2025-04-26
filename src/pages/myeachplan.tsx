@@ -11,7 +11,7 @@ import { Link, useParams } from "react-router";
 
 const MyEachPlan = () => {
 	const { planId } = useParams();
-	const queryClient = useQueryClient();
+
 	const { data, isLoading, isError, error } = useQuery({
 		queryKey: ["plan", planId],
 		queryFn: () => planApi.getPlanByPlanId(planId!),
