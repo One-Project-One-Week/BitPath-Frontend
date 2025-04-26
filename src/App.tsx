@@ -17,6 +17,7 @@ const Myeachroadmap = lazy(() => import("./pages/myeachroadmap"));
 const PlanRequest = lazy(() => import("./pages/planrequest"));
 const Leaderboard = lazy(() => import("./pages/leaderboard"));
 const MyEachPlan = lazy(() => import("./pages/myeachplan"));
+const SharedEachRoadmap = lazy(() => import("./pages/sharedEachRoadmap"));
 function App() {
 	const location = useLocation();
 	return (
@@ -53,6 +54,21 @@ function App() {
 								}
 							>
 								<ShowCase />
+							</Suspense>
+						}
+					/>
+					<Route
+						path=":roadmapId"
+						element={
+							<Suspense
+								key={location.pathname}
+								fallback={
+									<section className="h-[70vh]">
+										<PageTransition />
+									</section>
+								}
+							>
+								<SharedEachRoadmap />
 							</Suspense>
 						}
 					/>

@@ -17,7 +17,7 @@ const RoadMapForm = ({
 	});
 	return (
 		<div className="mt-20 py-20 rounded shadow">
-			<h1 className="text-center font-semibold text-2xl mb-4">
+			<h1 className="text-center font-semibold text-2xl text-gray-500 mb-4">
 				What Do You Desire To Learn?
 			</h1>
 			<div className="flex justify-center w-[40vw] mx-auto">
@@ -36,7 +36,7 @@ const RoadMapForm = ({
 					<CustomFormSubmitBtn
 						label="Generate"
 						isLoading={isLoading}
-						customCss=""
+						customCss="bg-green-500 hover:bg-green-600 text-white px-4 py-2 "
 					/>
 				</CustomForm>
 			</div>

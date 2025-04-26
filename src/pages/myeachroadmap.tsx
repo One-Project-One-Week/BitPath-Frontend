@@ -37,14 +37,13 @@ const Myeachroadmap = () => {
 		mutationFn: (id: string) => roadMapApi.deleteRoadmap(id),
 		onSuccess: () => {
 			toast.success("Abondoned Roadmap Successfully");
-			queryClient.invalidateQueries({ queryKey: ["myRoadMaps", "MyPlans"] });
+			queryClient.invalidateQueries({ queryKey: ["MyRoadMaps", "MyPlans"] });
 			navigate("/profile/roadmaps");
 		},
 		onError: () => {
 			toast.error("Error deleting roadmap");
 		},
 	});
-
 
 	return (
 		<section className="w-full mx-auto mb-10">
@@ -70,7 +69,11 @@ const Myeachroadmap = () => {
 							Make {data.visibility === "public" ? "Private" : "Public"}
 							{data.visibility === "private" ? <Share2 /> : <Lock />}
 						</Button>
-						<Button className="absolute right-0 top-12 bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 transition-colors duration-300 flex items-center gap-2" onClick={() => deleteRoadmap(id!)} disabled={isDeleting}>
+						<Button
+							className="absolute right-0 top-12 bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 transition-colors duration-300 flex items-center gap-2"
+							onClick={() => deleteRoadmap(id!)}
+							disabled={isDeleting}
+						>
 							Abondon
 							<Unplug />
 						</Button>

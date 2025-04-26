@@ -3,6 +3,7 @@ import PageTransition from "@/components/common/PageTransition";
 import RoadmapCard from "@/components/roadmap/RoadMapCard";
 import { Button } from "@/components/ui/button";
 import { sharedRoadmapApi } from "@/services/sharedRoadmapApi";
+import { Roadmap } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
@@ -49,8 +50,8 @@ const ShowCase = () => {
 					<PageTransition />
 				</div>
 			)}
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-				{data?.map((roadmap: { id: number; title: string }, id: number) => (
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+				{data?.map((roadmap: Roadmap, id: number) => (
 					<RoadmapCard key={roadmap.id} roadmap={roadmap} index={id} />
 				))}
 			</div>

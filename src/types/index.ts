@@ -19,7 +19,8 @@ export interface Roadmap {
 	id?: number;
 	user_id?: number;
 	title: string;
-	skills: Skill[];
+	estimatedTime?: string;
+	skills: Skill[] | string[];
 }
 
 export interface Profile {
