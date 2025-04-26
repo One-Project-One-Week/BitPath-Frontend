@@ -29,9 +29,14 @@ export const roadMapApi = {
 	},
 
 	async shareRoadmap(id: string, visibility: "public" | "private") {
-		const res = await api.patch(`roadmap/${id}/visibility `, {
+		const res = await api.patch(`/roadmap/${id}/visibility `, {
 			visibility,
 		});
+		return res.data;
+	},
+
+	async deleteRoadmap(id: string) {
+		const res = await api.delete(`/roadmap/${id}`);
 		return res.data;
 	},
 };

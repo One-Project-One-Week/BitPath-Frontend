@@ -32,7 +32,7 @@ const Profile = () => {
 		<div className="container mx-auto py-10 px-4">
 			<Card className="max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-green-100 shadow shadow-green-100">
 				<CardHeader className="pb-0">
-					<CardTitle className="text-2xl text-center">Profile</CardTitle>
+					<CardTitle className="text-2xl text-gray-600 text-center">Profile</CardTitle>
 				</CardHeader>
 				<CardContent className="pt-6">
 					<div className="flex flex-col md:flex-row items-center gap-8">
@@ -65,13 +65,13 @@ const Profile = () => {
 						</div>
 
 						<div className="flex-1 space-y-4 text-center md:text-left">
-							<h2 className="text-2xl font-bold">{profile.name}</h2>
+							<h2 className="text-2xl text-gray-700 font-semibold">{profile.name}</h2>
 							<p className="text-gray-500">{profile.email}</p>
 
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
 								<div className="bg-gray-50 p-3 rounded-lg">
 									<p className="text-sm text-gray-500">Current Streak</p>
-									<p className="text-xl font-semibold flex items-center justify-center md:justify-start">
+									<p className="text-xl text-gray-700 font-semibold flex items-center justify-center md:justify-start">
 										{currentStreak} day{currentStreak !== 1 ? "s" : ""}
 										{currentStreak > 0 && (
 											<Flame size={20} className="ml-2 text-amber-500" />
@@ -81,14 +81,14 @@ const Profile = () => {
 
 								<div className="bg-gray-50 p-3 rounded-lg">
 									<p className="text-sm text-gray-500">Longest Streak</p>
-									<p className="text-xl font-semibold">
+									<p className="text-xl text-gray-600 font-semibold">
 										{longestStreak} day{longestStreak !== 1 ? "s" : ""}
 									</p>
 								</div>
 
 								<div className="bg-gray-50 p-3 rounded-lg md:col-span-2">
 									<p className="text-sm text-gray-500">Last Studied</p>
-									<p className="text-lg">{formattedLastStudiedDate}</p>
+									<p className="text-lg text-gray-600">{formattedLastStudiedDate}</p>
 								</div>
 							</div>
 						</div>
