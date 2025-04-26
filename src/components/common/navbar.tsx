@@ -28,7 +28,7 @@ export default function Header() {
 
 	return (
 		<div
-			className={`flex flex-row justify-between border-b border-gray-300 hover:border-b-1 hover:border-gray-500 bg-white sticky z-50 top-0 left-0 w-full  transition-transform duration-300 ${
+			className={`flex flex-row justify-between border-b border-gray-300 hover:border-b-1 hover:border-gray-500 bg-white sticky z-50 top-0 left-0 w-full  transition-transform duration-300 select-none  ${
 				visible ? "translate-y-0" : "-translate-y-full"
 			}`}
 		>

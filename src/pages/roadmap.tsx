@@ -65,7 +65,10 @@ const Roadmap = () => {
 					<div className="py-12">
 						<div className="flex justify-end gap-2 px-4">
 							<SaveRoadmapForm prompt={prompt} response={roadmap} />
-							<Button onClick={() => setShowForm(true)}>
+							<Button
+								onClick={() => setShowForm(true)}
+								className="bg-green-500 hover:bg-green-600"
+							>
 								Generate A New Roadmap
 							</Button>
 						</div>

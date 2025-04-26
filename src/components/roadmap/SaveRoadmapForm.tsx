@@ -65,7 +65,12 @@ const SaveRoadmapForm = ({
 				type="hidden"
 				customParentCss="hidden"
 			/>
-			<Button type="submit" variant="outline" disabled={isPending || isSuccess}>
+			<Button
+				type="submit"
+				className="text-green-500 hover:text-green-500/80"
+				variant="outline"
+				disabled={isPending || isSuccess}
+			>
 				{isPending ? "Saving ..." : "Save To My Roadmaps"}
 			</Button>
 		</CustomForm>
