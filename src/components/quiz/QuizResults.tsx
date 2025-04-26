@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
+import {Link } from "react-router";
 import { motion } from "framer-motion";
 import { Award, BarChart, DoorOpen } from "lucide-react";
 import { useQuiz } from "./QuizContext";
 
 export default function QuizResults() {
-	const { isCompleted, calculateScore, questions, resetQuiz } = useQuiz();
+	const { isCompleted, calculateScore, questions } = useQuiz();
 
 	if (!isCompleted) return null;
 
@@ -136,13 +137,16 @@ export default function QuizResults() {
 			</div>
 
 			<div className="flex flex-col sm:flex-row gap-3 justify-center">
+				<Link to="/profile/plans">
+				
 				<Button
-					onClick={resetQuiz}
+					
 					className="bg-green-600 hover:bg-green-700 text-white"
 				>
 					Leave
 					<DoorOpen className="w-4 h-4 ml-2" />
 				</Button>
+					</Link>
 			</div>
 		</motion.div>
 	);
