@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Skill } from "@/types";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { Link } from "react-router";
 import * as Yup from "yup";
 import { Input } from "../ui/input";
 import CustomForm, { CustomFormSubmitBtn } from "./CustomForm";
@@ -26,14 +27,12 @@ export default function LoginForm({
 }: {
 	redirectToRoadmap: RedirectToRoadmap;
 }) {
-	const { googleLogin, isLoading } = useAuth(redirectToRoadmap);
+	const { googleLogin, login, isLoading } = useAuth(redirectToRoadmap);
 	const initialValue: InitialValue = {
 		email: "",
 		password: "",
 	};
-	const onSubmit = (values: InitialValue) => {
-		console.log(values);
-	};
+
 	const validationSchema = Yup.object({
 		email: Yup.string().email("Invalid email").required("Email is required"),
 		password: Yup.string()
@@ -54,6 +53,8 @@ export default function LoginForm({
 				<GoogleLogin
 					onSuccess={googleLogin}
 					onError={() => console.log("Login Failed")}
+					useOneTap
+					auto_select
 				/>
 			</GoogleOAuthProvider>
 			<div className="mt-4 relative">
@@ -67,7 +68,7 @@ export default function LoginForm({
 			<div>
 				<CustomForm
 					initialValue={initialValue}
-					onSubmit={onSubmit}
+					onSubmit={login}
 					validationSchema={validationSchema}
 				>
 					<CustomInput
@@ -87,9 +88,17 @@ export default function LoginForm({
 					<CustomFormSubmitBtn
 						isLoading={isLoading}
 						label="Login"
-						customCss="rounded w-full"
+						customCss="rounded w-full bg-green-500 hover:bg-green-600 text-white"
 					/>
 				</CustomForm>
+				<div className="mt-4">
+					<p className="text-center text-gray-500">
+						Don't have an account?{" "}
+						<Link to="/signup" className="text-green-500">
+							Sign up
+						</Link>
+					</p>
+				</div>
 			</div>
 		</div>
 		// </section>

@@ -27,13 +27,8 @@ export const authApi = {
 			);
 			console.log("Signup response:", response);
 			return response.data;
-		} catch (error: any) {
-			console.error("Signup API error:", {
-				message: error.message,
-				response: error.response?.data,
-				status: error.response?.status,
-				headers: error.response?.headers,
-			});
+		} catch (error: unknown) {
+			console.error("Signup failed:", error);
 			throw error;
 		}
 	},
@@ -51,6 +46,10 @@ export const authApi = {
 	},
 	getProfile: async () => {
 		const response = await api.get("/auth/profile");
+		return response.data.data.user;
+	},
+	logout: async () => {
+		const response = await api.post("/auth/logout");
 		return response.data;
 	},
 };

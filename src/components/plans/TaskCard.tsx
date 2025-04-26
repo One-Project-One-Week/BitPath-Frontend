@@ -27,8 +27,16 @@ const TaskCard = ({
 		mutationFn: async () => {
 			await taskApi.markTaskAsCompleted(id);
 		},
+		// onMutate: () => {
+		// 	toast.loading("Marking task as completed...");
+		// },
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["plan", String(planId)] });
+			queryClient.invalidateQueries({
+				queryKey: ["plan", String(planId)],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["quizs", planId],
+			});
 		},
 		onError: (error: AxiosError<{ message: string }>) => {
 			toast.error(error?.response?.data?.message ?? "Something went wrong");

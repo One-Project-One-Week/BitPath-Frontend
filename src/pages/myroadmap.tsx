@@ -1,4 +1,5 @@
 import ErrorDisplay from "@/components/common/ErrorDisplay";
+import PageTransition from "@/components/common/PageTransition";
 import CreateNewCard from "@/components/roadmap/CreateNewRoadMap";
 import RoadmapCard from "@/components/roadmap/RoadMapCard";
 import { roadMapApi } from "@/services/roadmapApi";
@@ -30,6 +31,11 @@ const MyRoadMaps = () => {
 							window.location.reload();
 						}}
 					/>
+				</div>
+			)}
+			{isLoading && (
+				<div className="h-[40vh] flex justify-center items-center">
+					<PageTransition />
 				</div>
 			)}
 			{!isLoading && isSuccess && (

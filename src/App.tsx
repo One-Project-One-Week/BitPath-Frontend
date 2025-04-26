@@ -18,6 +18,8 @@ const PlanRequest = lazy(() => import("./pages/planrequest"));
 const Leaderboard = lazy(() => import("./pages/leaderboard"));
 const MyEachPlan = lazy(() => import("./pages/myeachplan"));
 const SharedEachRoadmap = lazy(() => import("./pages/sharedEachRoadmap"));
+const Quizs = lazy(() => import("./pages/quizs"));
+
 function App() {
 	const location = useLocation();
 	return (
@@ -195,6 +197,21 @@ function App() {
 									}
 								>
 									<MyEachPlan />
+								</Suspense>
+							}
+						/>
+						<Route
+							path=":planId/quiz/:quizId"
+							element={
+								<Suspense
+									key={location.pathname}
+									fallback={
+										<section className="h-[70vh]">
+											<PageTransition />
+										</section>
+									}
+								>
+									<Quizs />
 								</Suspense>
 							}
 						/>
