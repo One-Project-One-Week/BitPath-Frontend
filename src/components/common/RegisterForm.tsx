@@ -1,7 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { toast } from "sonner";
-import * as Yup from "Yup";
+import * as Yup from "yup";
 import { Input } from "../ui/input";
 import CustomForm, { CustomFormSubmitBtn } from "./CustomForm";
 import CustomInput from "./CustomInput";
