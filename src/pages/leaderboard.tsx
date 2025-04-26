@@ -2,6 +2,7 @@ import ErrorDisplay from "@/components/common/ErrorDisplay";
 import PageTransition from "@/components/common/PageTransition";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { leaderboardApi } from "@/services/leaderboardApi";
+import { User } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { Flame, Medal, Trophy } from "lucide-react";
 
@@ -53,7 +54,7 @@ const Leaderboard = () => {
 
 								{/* Leaderboard rows */}
 								<div className="divide-y divide-gray-200">
-									{data.map((user, index: number) => (
+									{data.map((user: User, index: number) => (
 										<div
 											key={user.id}
 											className={`px-4 py-3 grid grid-cols-12 items-center ${getRowStyle(
@@ -154,62 +155,6 @@ const Leaderboard = () => {
 		</section>
 	);
 };
-
-// In a real app, this would come from an API
-const leaderboardData: User[] = [
-	{
-		id: 1,
-		name: "Han Lin",
-		longest_streak: 14,
-		current_streak: 14,
-		last_studied_date: "2025-04-25T00:00:00.000000Z",
-		profile_picture:
-			"https://lh3.googleusercontent.com/a/ACg8ocISs0OeG4BesdGmmZrYdjW8TGTkpBS8dHaAJCWInjFv2eZIdsNs=s96-c",
-		roadmap_count: 1,
-	},
-	// For demonstration, I'll add a few more mock users
-	{
-		id: 2,
-		name: "Jane Smith",
-		longest_streak: 21,
-		current_streak: 5,
-		last_studied_date: "2025-04-24T00:00:00.000000Z",
-		profile_picture: "/placeholder.svg?height=96&width=96",
-		roadmap_count: 3,
-	},
-	{
-		id: 3,
-		name: "Alex Johnson",
-		longest_streak: 30,
-		current_streak: 30,
-		last_studied_date: "2025-04-25T00:00:00.000000Z",
-		profile_picture: "/placeholder.svg?height=96&width=96",
-		roadmap_count: 2,
-	},
-	{
-		id: 4,
-		name: "Sam Taylor",
-		longest_streak: 7,
-		current_streak: 0,
-		last_studied_date: "2025-04-20T00:00:00.000000Z",
-		profile_picture: "/placeholder.svg?height=96&width=96",
-		roadmap_count: 1,
-	},
-	{
-		id: 5,
-		name: "Morgan Lee",
-		longest_streak: 10,
-		current_streak: 10,
-		last_studied_date: "2025-04-25T00:00:00.000000Z",
-		profile_picture: "/placeholder.svg?height=96&width=96",
-		roadmap_count: 4,
-	},
-];
-
-// Sort users by longest streak (descending)
-const sortedUsers = [...leaderboardData].sort(
-	(a, b) => b.longest_streak - a.longest_streak
-);
 
 // Get the heat map gradient based on the streak
 const getHeatMapGradient = (streak: number) => {

@@ -1,3 +1,13 @@
+export interface User {
+	id: number;
+	name: string;
+	longest_streak: number;
+	current_streak: number;
+	last_studied_date: string;
+	profile_picture: string;
+	roadmap_count: number;
+}
+
 export interface Skill {
 	id?: number;
 	roadmap_id?: number;
