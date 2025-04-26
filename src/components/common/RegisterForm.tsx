@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { AxiosError } from "axios";
+import { Link } from "react-router";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { Input } from "../ui/input";
@@ -107,9 +108,17 @@ export default function RegisterForm() {
 					<CustomFormSubmitBtn
 						isLoading={isLoading}
 						label="Sign Up"
-						customCss="rounded w-full"
+						customCss="rounded w-full bg-green-500 hover:bg-green-600 text-white"
 					/>
 				</CustomForm>
+			</div>
+			<div className="mt-4">
+				<p className="text-center text-gray-500">
+					Already have an account?{" "}
+					<Link to="/login" className="text-green-500">
+						Log in
+					</Link>
+				</p>
 			</div>
 		</div>
 	);

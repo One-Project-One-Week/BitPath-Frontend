@@ -101,7 +101,11 @@ const RequestPlanForm = () => {
 					</div>
 				)}
 				<div className="flex justify-end my-4 w-full">
-					<Button type="submit" disabled={isPending}>
+					<Button
+						type="submit"
+						disabled={isPending}
+						className="bg-green-500 hover:bg-green-600 text-white"
+					>
 						{isPending ? "Generating Study Plan..." : "Request Study Plan"}
 					</Button>
 				</div>

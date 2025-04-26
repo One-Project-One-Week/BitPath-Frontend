@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
 const api = axios.create({
 	baseURL: API_URL,
-	withCredentials: false, // Changed to false since we don't need credentials for signup
+	withCredentials: true, // Changed to false since we don't need credentials for signup
 	headers: {
 		"Content-Type": "application/json",
 		Accept: "application/json",
@@ -31,8 +31,8 @@ api.interceptors.response.use(
 		console.log(error.response);
 		if (
 			error.response.status === 401 &&
-			// error.resonse.data.message == "Token has expired" &&
-			error.response.data.message !== "unthorized" &&
+			error.response.data.message === "Token has expired" &&
+			// error.response.data.message !== "unthorized" &&
 			!originalRequest._retry
 		) {
 			originalRequest._retry = true;
@@ -49,7 +49,8 @@ api.interceptors.response.use(
 			} catch (refreshError) {
 				localStorage.removeItem("user");
 				localStorage.removeItem("accessToken");
-				window.location.href = "/login";
+				console.log("Error refreshing token:", refreshError);
+				// window.location.href = "/";
 				return Promise.reject(refreshError);
 			}
 		}
