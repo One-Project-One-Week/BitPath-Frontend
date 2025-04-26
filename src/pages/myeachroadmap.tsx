@@ -45,7 +45,7 @@ const Myeachroadmap = () => {
 		},
 	});
 
-	console.log(data);
+
 	return (
 		<section className="w-full mx-auto mb-10">
 			{isError && (

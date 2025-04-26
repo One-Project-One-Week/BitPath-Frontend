@@ -1,10 +1,37 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
 	const { auth } = useAuth();
+	const [prevScrollPos, setPrevScrollPos] = useState(0);
+	const [visible, setVisible] = useState(true);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			// Get current scroll position
+			const currentScrollPos = window.scrollY;
+
+			// Set the navbar visible if scrolling up, hidden if scrolling down
+			setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+
+			// Update previous scroll position
+			setPrevScrollPos(currentScrollPos);
+		};
+
+		// Add scroll event listener
+		window.addEventListener("scroll", handleScroll);
+
+		// Clean up the event listener on component unmount
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [prevScrollPos]);
+
 	return (
-		<div className="flex flex-row justify-between border-b border-gray-300 hover:border-b-1 hover:border-gray-500 transition duration-200">
+		<div
+			className={`flex flex-row justify-between border-b border-gray-300 hover:border-b-1 hover:border-gray-500 bg-white sticky z-50 top-0 left-0 w-full  transition-transform duration-300 ${
+				visible ? "translate-y-0" : "-translate-y-full"
+			}`}
+		>
 			<div className="ml-20 mt-4">
 				<Link to="/" className="gap-2 flex flex-row">
 					<svg
