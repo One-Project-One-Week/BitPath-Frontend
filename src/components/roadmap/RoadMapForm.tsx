@@ -1,4 +1,4 @@
-import * as yup from "Yup";
+import * as yup from "yup";
 import CustomForm, { CustomFormSubmitBtn } from "../common/CustomForm";
 import CustomInput from "../common/CustomInput";
 import { Input } from "../ui/input";
