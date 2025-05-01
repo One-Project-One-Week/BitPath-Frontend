@@ -7,10 +7,12 @@ import { taskApi } from "@/services/taskApi";
 import { Plan } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { Lock, MessageCircleQuestion } from "lucide-react";
-import { Link, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "sonner";
 
 const MyEachPlan = () => {
 	const { planId } = useParams();
+	const navigate = useNavigate();
 	const { data, isLoading, isError, error } = useQuery({
 		queryKey: ["plan", planId],
 		queryFn: () => planApi.getPlanByPlanId(planId!),
@@ -69,15 +71,35 @@ const MyEachPlan = () => {
 						{plan.is_finished ? (
 							<div>
 								<div className="flex items-center gap-2">
-									<Link to={"quiz/" + quizs?.id}>
-										<Button
-											variant="secondary"
-											className="bg-green-500 hover:bg-green-600 text-white"
-										>
-											<MessageCircleQuestion />
-											Take Quiz
-										</Button>
-									</Link>
+									<Button
+										variant="secondary"
+										className="bg-green-500 hover:bg-green-600 text-white"
+										onClick={() => {
+											const myPromise = new Promise<{ name: string }>(
+												(resolve) => {
+													setTimeout(() => {
+														resolve({ name: "string" });
+													}, 3000);
+												}
+											);
+
+											toast.promise(myPromise, {
+												loading: "Quiz Loading..., Patient You Must Be!",
+												success: () => {
+													navigate("quiz/" + quizs?.id);
+
+													return {
+														message: "Quizs loaded",
+														description: "Redirecting To Quizy Ground",
+													};
+												},
+												error: "Error",
+											});
+										}}
+									>
+										<MessageCircleQuestion />
+										Take Quiz
+									</Button>
 								</div>
 							</div>
 						) : (
