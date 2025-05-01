@@ -6,7 +6,7 @@ import { planApi } from "@/services/planApi";
 import { taskApi } from "@/services/taskApi";
 import { Plan } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import { Crown, Lock, MessageCircleQuestion } from "lucide-react";
+import { Lock, MessageCircleQuestion } from "lucide-react";
 import { Link, useParams } from "react-router";
 
 const MyEachPlan = () => {
@@ -16,10 +16,10 @@ const MyEachPlan = () => {
 		queryFn: () => planApi.getPlanByPlanId(planId!),
 	});
 
-	const { data: quizs, isLoading: isQuizLoading } = useQuery({
+	const { data: quizs } = useQuery({
 		queryKey: ["quizs", planId],
 		queryFn: () => taskApi.getTasksQuizs(Number(planId!)),
-		staleTime: 1000,
+		enabled: !!data?.is_finished,
 	});
 
 	console.log(quizs);
@@ -66,8 +66,7 @@ const MyEachPlan = () => {
 							</div>
 						</div>
 						{}
-						{plan.is_finished ||
-						(quizs?.status === "pending" && !isQuizLoading) ? (
+						{plan.is_finished ? (
 							<div>
 								<div className="flex items-center gap-2">
 									<Link to={"quiz/" + quizs?.id}>
@@ -81,19 +80,19 @@ const MyEachPlan = () => {
 									</Link>
 								</div>
 							</div>
-						) : quizs?.status === "completed" ? (
-							<div>
-								<div className="flex items-center gap-2">
-									<Button
-										variant="secondary"
-										className="bg-yellow-500 hover:bg-yellow-600 text-white"
-									>
-										<Crown />
-										Quiz Completed
-									</Button>
-								</div>
-							</div>
 						) : (
+							// ) : quizs?.status === "completed" ? (
+							// 	<div>
+							// 		<div className="flex items-center gap-2">
+							// 			<Button
+							// 				variant="secondary"
+							// 				className="bg-yellow-500 hover:bg-yellow-600 text-white"
+							// 			>
+							// 				<Crown />
+							// 				Quiz Completed
+							// 			</Button>
+							// 		</div>
+							// 	</div>
 							<div className="flex items-center gap-2">
 								<Button
 									variant="secondary"
